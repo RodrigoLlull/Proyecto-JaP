@@ -1,5 +1,5 @@
 body{
-  background-color: rgba(187, 172, 242, 0.5);
+  background-color: rgba(214, 214, 232);
 }
 
 .jumbotron,
@@ -191,4 +191,8 @@ a.custom-card:hover {
 
 .checked {
   color: orange;
+}
+
+.error {
+  border: 1px solid red;
 }
