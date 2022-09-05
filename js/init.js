@@ -39,3 +39,20 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+//Funcion que crea el cotenido HTML con los datos del usuario
+function usuarioBarraNavegacion(usuario) {
+  return `
+  <a class="nav-link" href="my-profile.html">${usuario}</a>
+  `
+};
+
+// Al cargar el DOM, insertamos el cotenido html 
+document.addEventListener("DOMContentLoaded", () => {
+
+  let usuario = document.getElementById("usuario");
+  let usuarioIngresado = localStorage.getItem("usuario");
+  
+  usuario.innerHTML += usuarioBarraNavegacion(usuarioIngresado);
+
+});

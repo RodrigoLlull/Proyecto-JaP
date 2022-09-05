@@ -8,6 +8,7 @@ let maxCount = undefined;
 
 function sortCategories(criteria, array){
     let result = [];
+    // criterio de orden
     if (criteria === ORDER_ASC_BY_NAME)
     {
         result = array.sort(function(a, b) {
