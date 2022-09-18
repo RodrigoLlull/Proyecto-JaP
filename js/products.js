@@ -1,3 +1,8 @@
+function productID(id) {
+  localStorage.setItem("productID", id);
+  window.location = "product-info.html"
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   // al cargar la pagina, trae el JSON el cual luego sera iterado
   let catID = (localStorage.getItem('catID'));
@@ -31,10 +36,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Funcion para crear de forma dinamica elementos html, con la informacion de cada producto
   function crearHTML(producto) {
     return `
-    <div class="shadow rounded list-group-item list-group-item-action cursor-active mb-2">
+    <div onclick="productID(${producto.id})" class="shadow rounded list-group-item list-group-item-action cursor-active mb-2">
       <div class="row">
            <div class="col-3">
-            <img class="img-thumbnail" src="${producto.image}" alt="${producto.description}">
+            <img class="img-fluid" src="${producto.image}" alt="${producto.description}">
            </div>
           <div class="col">
           <div class="d-flex w-100 justify-content-between">
