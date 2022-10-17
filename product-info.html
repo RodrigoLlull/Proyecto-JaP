@@ -9,6 +9,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <script src="js/redireccionar.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
@@ -37,40 +38,76 @@
     </div>
   </nav>
   <main>
-    <div id='listado'>
-    </div>
-    <div class="mt-5 container">
-      <hr class="mb-4">
-      <div>
-        <h4>Comentarios</h4>
+    <div class="container mt-3 py-4 list-group-item rounded shadow">
+      <div class="row" id='listado'>
       </div>
-      <div id="comentarios">
-      </div>
-      <div>
-        <form action="" method="">
-          <div class="mt-4">
-            <h4>Comentar</h4>
-          </div>
-          <div>
-            <p><em>Tú Comentario:</em></p>
-            <textarea id="tuComentario" cols="50" rows="3" class="form-control-lg mb-2"></textarea>
-          </div>
-          <div>
-            <p class="mt-2"><em>Puntuación:</em></p>
-              <select id="tuPuntuacion" class="w-25 form-control-lg ">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-          </div>
-          <div>
-            <button class="btn btn-primary btn-lg btn-block mt-3 mb-4" type="submit" id="btnEnviar">Enviar</button>
-          </div>
-        </form>
+      <div class="row">
+        <div class="col-12 mt-2">
+          <button class="btn btn-primary col-12 py-2" id="comprar">
+            <strong>
+              COMPRAR
+            </strong>
+          </button>
+        </div>
       </div>
     </div>
+
+    <div class="container mt-3 py-4 list-group-item rounded shadow">
+      <div class="row">
+
+        <div class="col-6 list-group-item bg-dark bg-gradient text-primary rounded shadow mx-auto">
+          <h4 class="text-center my-4">Comentarios</h4>
+          <div id="añadirComentario" class="d-flex flex-column-reverse bg-dark rounded">
+          </div>
+          <div id="comentarios" class="bg-dark rounded ">
+          </div>
+        </div>
+
+        <div class="col-5 list-group-item rounded shadow mx-auto text-center bg-dark bg-gradient text-light">
+          <div class="row">
+            <div class="col-12">
+
+              <div class="my-4 text-primary">
+                <h4>Comentar</h4>
+              </div>
+
+              <div>
+                <textarea id="tuComentario" class="form-control-lg mb-2 "></textarea>
+              </div>
+
+              <div class="mt-4">
+                <p class="mt-2"><strong>Puntuación:</strong></p>
+                <select id="tuPuntuacion" class="w-25 form-control-lg">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+
+              <div class="mt-4">
+                <button class="btn btn-primary col-12 my-4" type="submit" id="btnEnviar">Enviar</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+  <div class="container list-group-item rounded shadow my-4">
+    <div class="row">
+      <div class="col-12 rounded shadow text-center list-group-item bg-dark bg-gradient text-light">
+        <h4 class="my-3 text-primary">Productos Relacionados</h4>
+        <div id="productosRelacionados" class="row mx-auto">
+        </div>
+    </div>
+    </div>
+  </div>
+
   </main>
   <footer class="text-muted bg-dark">
     <div class="container">

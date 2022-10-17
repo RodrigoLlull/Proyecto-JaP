@@ -40,10 +40,23 @@ let getJSONData = function(url){
     });
 }
 
+function eliminarUsuario(){
+  window.localStorage.removeItem('usuario');
+}
+
 //Funcion que crea el cotenido HTML con los datos del usuario
 function usuarioBarraNavegacion(usuario) {
   return `
-  <a class="nav-link" href="my-profile.html">${usuario}</a>
+  <div class="dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">${usuario}
+  </a>
+
+  <ul class="dropdown-menu bg-dark bg-gradient" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item text-light" href="cart.html">Mi carrito</a></li>
+    <li><a class="dropdown-item text-light" href="my-profile.html">Mi perfil</a></li>
+    <li onclick='eliminarUsuario()'><a onclick='eliminarUsuario()' class="dropdown-item text-light" href="">Cerrar sesión</a></li>
+  </ul>
+  </div>
   `
 };
 
