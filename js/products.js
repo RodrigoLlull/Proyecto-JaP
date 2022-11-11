@@ -15,8 +15,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   let catName = productos.catName;
   let descripcion = document.querySelector('#descripcion');
 
-  console.log(productosArr);
-
   // Variables utilizadas para filtrar
   const ordenPrecioAsc = "0-9";
   const ordenPrecioDesc = "9-0";
@@ -41,7 +39,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Funcion para crear de forma dinamica elementos html, con la informacion de cada producto
   function crearHTML(producto) {
     return `
-    <div onclick="productID(${producto.id})" class="shadow rounded list-group-item list-group-item-action cursor-active mb-2">
+    <div onclick="productID(${producto.id})" class="shadow rounded list-group-item list-group-item-action cursor-active mb-1">
       <div class="row">
            <div class="col-3">
             <img class="img-fluid" src="${producto.image}" alt="${producto.description}">
@@ -153,11 +151,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Evento que realiza una busqueda en tiempo real
   tiempoReal.addEventListener('input', () =>{
-    let productosFiltrados = [];
     listado.innerHTML = ''
     for (const producto of productosArr) {
       if (producto.name.toLowerCase().includes(tiempoReal.value.toLowerCase()) || producto.description.toLowerCase().includes(tiempoReal.value.toLowerCase())) {
-        productosFiltrados.push(producto)
         listado.innerHTML += crearHTML(producto)
       }
     }

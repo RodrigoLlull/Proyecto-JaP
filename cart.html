@@ -18,7 +18,8 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient p-1 ">
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark bg-gradient p-1">
       <div class="container">
         <button
           class="navbar-toggler"
@@ -47,80 +48,223 @@
         </div>
       </div>
     </nav>
-    <main class="col row d-flex justify-content-between container-fluid">
-      
-        <div class="list-group-item my-5 h-75 rounded shadow col-lg-6 container">
-          <div
-            class="navbar navbar-expand-lg navbar-secondary bg-dark bg-gradient d-flex">
-            <h5 class="m-auto text-white">Seleccione el Tipo de Envío</h5>
-          </div>
-          <div class="btn-group-vertical">
-            <div class="">
-              <input
-                type="radio"
-                name="radio"
-                id="premium"
-              />
-              <label for="premium">Premium 2 a 5 días (15%)</label>
-              <br/>
-              <input
-                type="radio"
-                name="radio"
-                id="express"
-              />
-              <label for="express">Express 5 a 8 días (7%)</label>
-              <br/>
-              <input
-                type="radio"
-                name="radio"
-                id="standard"
-              />
-              <label for="standard">Standard 12 a 15 días (5%)</label>
-            </div>
-          </div>
-          <hr class="mt-0 border border-dark border-1" />
-          <div
-            class="navbar navbar-expand-lg navbar-secondary bg-dark bg-gradient d-flex">
-            <h5 class="m-auto text-white">Dirección de Envío</h5>
-          </div>
-            <div class="d-inline-flex flex-wrap container my-3">
-              <div class="col-6">
-                <label class="" for="">Calle</label>
-                <input class="form-control" id="" type="search">
+    
+    <main class="container-fluid">
+      <form class="d-flex flex-column-reverse flex-sm-row needs-validation mt-sm-2 my-md-4" id="finalizarCompra" novalidate>
+        <div class="col-sm-6 px-lg-4 px-sm-1 mt-2 mt-sm-0">
+            <div class="list-group-item  rounded  shadow-sm">
+              <div
+                class="navbar bg-dark bg-gradient">
+                <h5 class="m-auto text-white">Seleccione el Tipo de Envío</h5>
               </div>
-              <div class="mx-auto">
-                <label class="" for="">Número</label>
-                <input class="form-control" id="" type="search">
-              </div>
-              <div class="col-6 mt-3">
-                <label class="" for="">Esquina</label>
-                <input class="form-control" id="" type="search">
-              </div>
-            </div>
-        </div>
+              
+              <fieldset id="tiposEnvio" class="btn-group-vertical"> 
+                <div>
+                  <input type="radio" class="form-check-input" name="radio" id="premium" />
+                  <label for="premium">Premium 2 a 5 días (15%)</label>
+                </div> 
 
-        <div class="list-group-item my-5 h-100 rounded shadow col-lg-5" >
-          <div
-            class="navbar navbar-expand-lg navbar-secondary bg-dark bg-gradient d-flex"
-          >
-            <h5 class="m-auto text-light">Detalles de la Compra</h5>
-          </div>
-          <div class="d-flex justify-content-between mt-2" id="infoUsuario">
-            
-            </div>
-            <hr class="mt-0 border border-dark border-1" />
-            <table >
-              <tbody  class="list-group-item border border-secondary rounded border-1 bg-dark bg-gradient text-light" id="infoCompra">
+                <div>
+                  <input type="radio" class="form-check-input" name="radio" id="express" />
+                  <label for="express">Express 5 a 8 días (7%)</label>
+                </div>
+
+                <div>
+                  <input type="radio" class="form-check-input" name="radio" id="standard" />
+                  <label for="standard">Standard 12 a 15 días (5%)</label>
+                  <div class="invalid-feedback text-center mb-2">
+                    Debes seleccionar un tipo de envío
+                  </div>
+                </div>
+              </fieldset>
+              <hr class="mt-0 border border-dark border-1" />
+              <div
+                class="navbar bg-dark bg-gradient"
+              >
+                <h5 class="m-auto text-white">Dirección de Envío</h5>
+              </div>
+              <div class="d-inline-flex flex-wrap my-3">
+                <div class="col-12 col-sm-6">
+                  <label class="" for="calle">Calle</label>
+                  <input class="form-control" id="calle" type="text" />
+                  <div class="invalid-feedback text-center">
+                    Debe Ingresar una Calle
+                  </div>
+                </div>
+                <div class="mx-auto col-12 col-sm-4 mt-3 mt-sm-0">
+                  <label class="" for="numero">Número</label>
+                  <input class="form-control" id="numero" type="text" />
+                  <div class="invalid-feedback text-center">
+                    Debe Ingresar un Número
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6 mt-3">
+                  <label class="" for="esquina">Esquina</label>
+                  <input class="form-control" id="esquina" type="text" />
+                  <div class="invalid-feedback text-center">
+                    Debe Ingresar una Esquina
+                  </div>
+                </div>
+              </div>
+              <hr class="mt-0 border border-dark border-1">
+              <div class="">
+                <div
+                  class="navbar bg-dark bg-gradient mb-2"
+                >
+                  <h5 class="m-auto text-white">Forma de Pago</h5>
+                </div>
+                <div class="text-center row" >
+                  <a
+                  id="seleccionarFormaPago"
+                  type="button"
+                  class="col-6"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                  data-bs-whatever="@mdo"
+                  >
+                  Seleccionar
+                  </a>
+                  <div class="invalid-feedback text-center">
+                    Debe Seleccionar una Forma de Pago
+                  </div>
+                  <p id="formaPagoTarjeta" class="d-none col-6">
+                    Tarjeta de Credito
+                  </p>
+                  <p id="formaPagoBanco" class="d-none col-6">
+                    Transferencia Bancaria
+                  </p>
+                </div>
                 
-              </tbody>
-            
-            </table>
-            <hr class="mt-3 border border-dark border-1" />
-            <div class="mb-3 mx-auto text-center list-group-item rounded bg-dark bg-gradient shadow text-light w-50">
-              <h5>Total <span id="tipoMoneda"></span> <span id="costoTotal"></span></h5>
+                <div
+                  class="modal fade"
+                  id="exampleModal"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                          <strong>Forma de Pago</strong>
+                        </h1>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                          <div>
+                            <input type="radio" class="form-check-input" name="formaPago" id="tarjetaCredito">Tarjeta de Credito</input>
+                            <div class="d-inline-flex row my-3">
+                              <div class="col-12 col-sm-6">
+                                <label class="" for="">Número de Tarjeta</label>
+                                <input class="form-control" id="numeroTarjeta" type="search" />
+                                <div class="invalid-feedback ">
+                                  Debe Ingresar un Numero de Tarjeta
+                                </div>
+                              </div>
+                              <div class="mx-sm-auto text-center col-6 col-sm-4 mt-3 mt-sm-0">
+                                <label class="" for="">código de seg.</label>
+                                <input class="form-control" maxlength="3" id="codigoSeg" type="search" />
+                                <div class="invalid-feedback ">
+                                  Debe Ingresar un Codigo de Seguridad
+                                </div>
+                              </div>
+                              <div class="col-12 col-sm-6 mt-3">
+                                <label class="" for="">Vencimiento (MM/AA)</label>
+                                <input class="form-control" id="vencimiento" type="text" />
+                                <div class="invalid-feedback ">
+                                  Debe Ingresar una Fecha
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <hr>
+                          <div>
+                            <div>
+                              <input type="radio" class="form-check-input" name="formaPago" id="transferenciaBancaria">Transferencia Bancaria</input>
+                            </div>
+                            <div class="d-inline-flex flex-wrap my-3">
+                              <div>
+                                <label class="" for="">Número de cuenta</label>
+                                <input class="form-control" id="numeroCuenta" type="search" />
+                                <div class="invalid-feedback ">
+                                  Debe Ingresar un Numero de Cuenta
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-primary"
+                          data-bs-dismiss="modal"
+                        >
+                          Cerrar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
+          
+          <div>
+            <button class="btn btn-primary bg-gradient col-12 mt-2 mt-md-3 mb-3 mb-sm-0" type="submit">
+              Finalizar Compra
+            </button>
+          </div>
+      </div>
+
+      <div class="list-group-item rounded shadow-sm col-sm-6 mt-2 mt-sm-0">
+        <div
+          class="navbar bg-dark bg-gradient "
+        >
+          <h5 class="m-auto text-light">Detalle de la Compra</h5>
         </div>
+        <div class="d-flex justify-content-between mt-2" id="infoUsuario"></div>
+        <hr class="mt-0 border border-dark border-1" />
+        <table>
+          <tbody
+            class="list-group-item rounded bg-dark bg-gradient text-light"
+            id="infoCompra"
+          ></tbody>
+        </table>
+        <hr class="mt-3 border border-dark border-1" />
+        <div
+          class="mb-3 mx-auto text-center list-group-item rounded bg-dark bg-gradient shadow text-light col-10 col-md-8 col-lg-7"
+        >
+          <h5>
+            SubTotal <br /><span class="m-2">USD</span
+            ><span id="subTotalCompra"></span>
+          </h5>
+        </div>
+        <div
+          class="mb-3 mx-auto text-center list-group-item rounded bg-dark bg-gradient shadow text-light col-10 col-md-8 col-lg-7"
+        >
+          <h5>
+            Costo De Envío <br /><span class="m-2">USD</span
+            ><span id="costoEnvio"></span>
+          </h5>
+        </div>
+        <div
+          class="mb-3 mx-auto text-center list-group-item rounded bg-dark bg-gradient shadow text-light col-10 col-md-8 col-lg-7"
+        >
+          <h5>
+            Total <br /><span class="m-2">USD</span
+            ><span id="costoTotal"></span>
+          </h5>
+        </div>
+      </div>
+    </form>
     </main>
+    <div class="alert alert-success d-none" id="alertFormSuccess" >
+      Compra Realizada con Exito
+    </div>
     <footer class="text-muted bg-dark bg-gradient">
       <div class="container">
         <p class="float-end">

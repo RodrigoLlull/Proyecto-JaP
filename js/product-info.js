@@ -12,8 +12,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   let listado = document.querySelector('#listado')
   let productosRelacionados = document.querySelector('#productosRelacionados')
 
-  console.log(productoData.id);
-  console.log(productoData);
 
   // solicitud que trae los comentarios
   let URLProductComent = `${PRODUCT_INFO_COMMENTS_URL}${productID}${EXT_TYPE}`
@@ -29,6 +27,31 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // variable perteneciente al boton de comprar producto
   let comprar = document.querySelector('#comprar')
+
+  function comprarProducto(producto) {
+
+    
+
+    let productoComprado = {}
+
+    if (localStorage.getItem("productoCarrito")) {
+      productoComprado = JSON.parse(localStorage.getItem("productoCarrito"))
+    }
+
+    productoComprado[productID] = {
+      cost: producto.cost,
+      currency: producto.currency,
+      image: producto.images[0],
+      name: producto.name,
+      unitCount: 1,
+      id: producto.id
+    }
+
+    localStorage.setItem("productoCarrito", JSON.stringify(productoComprado))
+    window.location.assign("cart.html")
+     
+  }
+
 
   //Crea las estrellas con respecto a la puntuacion de cada comentario
   function crearEstrellas(score) {
@@ -81,7 +104,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // funcion que crea el contenido HTML, con la respectiva informacion del producto
   function crearHTML(producto) {
     return `
-      <div class="list-group-item col-6 mx-auto rounded shadow bg-dark bg-gradient text-light">
+      <div class="list-group-item col-12 col-md-6 mx-auto rounded shadow bg-dark bg-gradient text-light">
         <div class="row">
           <h3 class="mt-3 mb-4 text-primary">${producto.name}</h3>
           <hr>
@@ -101,7 +124,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           </div>
 
       </div>
-      <div class="list-group-item col-5 mx-auto rounded shadow bg-dark bg-gradient py-4">
+      <div class="list-group-item col-12 col-md-5 mx-auto rounded shadow bg-dark bg-gradient py-4">
         <div class='row'>
           
           <div id="carouselExampleFade" class="carousel carousel-inner slide carousel-fade" data-bs-ride="carousel">
@@ -158,25 +181,18 @@ document.addEventListener('DOMContentLoaded', async () => {
           <p class="my-1">${tuComentario.value}</p>
           </div>
           `
-      añadirComentario.innerHTML += comentarioNuevo
-    }
-  })
+      añadirComentario.innerHTML += comentarioNuevo;
+      tuComentario.value = '';
+      tuPuntuacion.value = 1;
+    };
+  });
 
   // evento para comprar un producto
-  let arrayCarrito = [];
 
+  
   comprar.addEventListener('click', ()=>{
-    let jsonCarrito = JSON.parse(localStorage.getItem('comprarProductoID'))
-    if(comprarProductoID != null && comprarProductoID != "" && comprarProductoID != false && comprarProductoID != undefined){
-      jsonCarrito = JSON.parse(localStorage.getItem('comprarProductoID')) 
-    console.log(jsonCarrito);
-    arrayCarrito.push(productoData.id)}
+    comprarProducto(productoData)
     
-
-    if (comprarProductoID.value != productoData.id) {
-      localStorage.setItem("comprarProductoID", productoData.id);
-    }
-   
 
   })
 

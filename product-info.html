@@ -37,8 +37,8 @@
       </div>
     </div>
   </nav>
-  <main>
-    <div class="container mt-3 py-4 list-group-item rounded shadow">
+  <main class="container-fluid">
+    <div class="mt-0 mt-sm-3 mb-2 list-group-item rounded shadow">
       <div class="row" id='listado'>
       </div>
       <div class="row">
@@ -52,18 +52,10 @@
       </div>
     </div>
 
-    <div class="container mt-3 py-4 list-group-item rounded shadow">
+    <div class=" mt-0 mt-sm-3 py-4 list-group-item rounded shadow">
       <div class="row">
 
-        <div class="col-6 list-group-item bg-dark bg-gradient text-primary rounded shadow mx-auto">
-          <h4 class="text-center my-4">Comentarios</h4>
-          <div id="añadirComentario" class="d-flex flex-column-reverse bg-dark rounded">
-          </div>
-          <div id="comentarios" class="bg-dark rounded ">
-          </div>
-        </div>
-
-        <div class="col-5 list-group-item rounded shadow mx-auto text-center bg-dark bg-gradient text-light">
+        <div class="col-12 col-sm-5 list-group-item rounded shadow mx-auto text-center bg-dark bg-gradient text-light">
           <div class="row">
             <div class="col-12">
 
@@ -72,7 +64,7 @@
               </div>
 
               <div>
-                <textarea id="tuComentario" class="form-control-lg mb-2 "></textarea>
+                <textarea id="tuComentario" class="form-control mb-2 "></textarea>
               </div>
 
               <div class="mt-4">
@@ -94,11 +86,17 @@
           </div>
         </div>
 
-
+        <div class="col-12 col-sm-6 list-group-item bg-dark bg-gradient text-primary rounded shadow mx-auto mt-2 mt-sm-0">
+          <h4 class="text-center my-4">Comentarios</h4>
+          <div id="añadirComentario" class="d-flex flex-column-reverse bg-dark rounded">
+          </div>
+          <div id="comentarios" class="bg-dark rounded ">
+          </div>
+        </div>
       </div>
     </div>
 
-  <div class="container list-group-item rounded shadow my-4">
+  <div class=" list-group-item rounded shadow my-2">
     <div class="row">
       <div class="col-12 rounded shadow text-center list-group-item bg-dark bg-gradient text-light">
         <h4 class="my-3 text-primary">Productos Relacionados</h4>
