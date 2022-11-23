@@ -76,23 +76,25 @@ document.addEventListener('DOMContentLoaded', async () => {
    productoLocalStorage = Object.values(productoLocalStorage);
    function generarProductoComprado(productoServidor, infoLocalStorage) {
       let carrito = `
-            <tr>
+            <tr id ="tr${productoServidor.id}">
                 <td class="col-3 col-md-2"><img src="${productoServidor.image}" class="img-fluid"/></td>
                 <td class="col-1 col-md-2 text-center"><strong>${productoServidor.name}<strong></td>
                 <td class="col-1 col-md-2 text-center"><strong>${productoServidor.currency}</strong><br/><span id="precioProducto${productoServidor.id}">${productoServidor.unitCost}</span></td>
                 <td class="col-md-3 "> <input type="number" min="1" class=" form-control" id="inputCantidadURL${productoServidor.id}" value="${productoServidor.count}"></td>
-                <td class="col-1 col-md-2 text-center"><strong>${productoServidor.currency}</strong><br><span id="subTotalProducto${productoServidor.id}">${productoServidor.unitCost}</span></td> 
+                <td class="col-1 col-md-2 text-center"><strong>${productoServidor.currency}</strong><br><span id="subTotalProducto${productoServidor.id}">${productoServidor.unitCost}</span></td>
+                <td class="col-1 col-md-2 "><button class="btn btn-danger" id='btnEliminar${productoServidor.id}'><img src='img/trash.svg'></button></td>
             </tr>
       `;
 
       for (const producto of infoLocalStorage) {
          carrito += `
-            <tr>
+            <tr id ="tr${producto.id}">
                 <td class="col-3 col-md-2"><img src="${producto.image}" class="img-fluid"/></td>
                 <td class="col-1 col-md-2 text-center "><strong>${producto.name}<strong></td>
                 <td class="col-1 col-md-2 text-center"><strong>USD</strong><br/><span id="precioProductoLS${producto.id}">${convertirUYUADolares(producto.currency, producto.cost)}</span></td>
                 <td class="col-3 col-md-2 "> <input type="number" min="1" class="form-control" id="inputCantidadLS${producto.id}" value="${producto.unitCount}"></td>
                 <td class="col-1 col-md-2 text-center "><strong>USD<br></strong><span id="subTotalProductoLS${producto.id}">${convertirUYUADolares(producto.currency, producto.cost)}</span></td>
+                <td class="col-1 col-md-2"><button class="btn btn-danger" id='btnEliminar${producto.id}'><img src='img/trash.svg'></button></td>
             </tr>
          `
       };
@@ -126,6 +128,7 @@ document.addEventListener('DOMContentLoaded', async () => {
    // suma los subtotales de cada producto del local storage y la url
    function suma() {
       let suma = parseInt(subTotalProducto.textContent)
+      
       for (const producto of productoLocalStorage) {
 
          let subTotalProductoLS = document.querySelector(`#subTotalProductoLS${producto.id}`);
@@ -150,16 +153,16 @@ document.addEventListener('DOMContentLoaded', async () => {
             subTotalCompra.innerHTML = suma();
 
             if (premium.checked) {
-               costoEnvio.innerHTML = Math.ceil(suma() * 15 / 100);
-               precioTotal.innerHTML = suma() + parseInt(costoEnvio.textContent);
+               costoEnvio.innerHTML = Math.ceil((parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent)) * 15 / 100);
+               precioTotal.innerHTML = parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent) + parseInt(costoEnvio.textContent);
             };
             if (express.checked) {
-               costoEnvio.innerHTML = Math.ceil(suma() * 7 / 100);
-               precioTotal.innerHTML = suma() + parseInt(costoEnvio.textContent);
+               costoEnvio.innerHTML = Math.ceil((parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent)) * 7 / 100);
+               precioTotal.innerHTML = parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent) + parseInt(costoEnvio.textContent);
             };
             if (standard.checked) {
-               costoEnvio.innerHTML = Math.ceil(suma() * 5 / 100);
-               precioTotal.innerHTML = suma() + parseInt(costoEnvio.textContent);
+               costoEnvio.innerHTML = Math.ceil((parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent)) * 5 / 100);
+               precioTotal.innerHTML = parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent) + parseInt(costoEnvio.textContent);
             };
          });
       };
@@ -172,16 +175,16 @@ document.addEventListener('DOMContentLoaded', async () => {
          subTotalProducto.innerHTML = inputCantidadURL.value * parseInt(precioProducto.textContent);
          subTotalCompra.innerHTML = suma();
          if (premium.checked) {
-            costoEnvio.innerHTML = Math.ceil(suma() * 15 / 100);
-            precioTotal.innerHTML = suma() + parseInt(costoEnvio.textContent);
+            costoEnvio.innerHTML = Math.ceil((parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent)) * 15 / 100);
+            precioTotal.innerHTML = parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent) + parseInt(costoEnvio.textContent);
          };
          if (express.checked) {
-            costoEnvio.innerHTML = Math.ceil(suma() * 7 / 100);
-            precioTotal.innerHTML = suma() + parseInt(costoEnvio.textContent);
+            costoEnvio.innerHTML = Math.ceil((parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent)) * 7 / 100);
+            precioTotal.innerHTML = parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent) + parseInt(costoEnvio.textContent);
          };
          if (standard.checked) {
             costoEnvio.innerHTML = Math.ceil(suma() * 5 / 100);
-            precioTotal.innerHTML = suma() + parseInt(costoEnvio.textContent);
+            precioTotal.innerHTML = parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent) + parseInt(costoEnvio.textContent);
          };
       });
 
@@ -312,18 +315,77 @@ document.addEventListener('DOMContentLoaded', async () => {
    function valorEnvioYTotal() {
       premium.addEventListener('input', () => {
          costoEnvio.innerHTML = parseInt(Math.ceil(subTotalCompra.textContent) * 0.15);
-         precioTotal.innerHTML = suma() + parseInt(costoEnvio.textContent);
+         precioTotal.innerHTML = parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent) + parseInt(costoEnvio.textContent);
       });
 
       express.addEventListener('input', () => {
          costoEnvio.innerHTML = parseInt(Math.ceil(subTotalCompra.textContent) * 0.07);
-         precioTotal.innerHTML = suma() + parseInt(costoEnvio.textContent);
+         precioTotal.innerHTML = parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent) + parseInt(costoEnvio.textContent);
       });
 
       standard.addEventListener('input', () => {
          costoEnvio.innerHTML = parseInt(Math.ceil(subTotalCompra.textContent) * 0.05);
-         precioTotal.innerHTML = suma() + parseInt(costoEnvio.textContent);
+         precioTotal.innerHTML = parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent) + parseInt(costoEnvio.textContent);
       });
    };
    valorEnvioYTotal();
+
+   function eliminarProducto(productoServidor, productoStorage) {
+      let btnEliminarServidor = document.querySelector(`#btnEliminar${productoServidor.id}`);
+      let trServidor = document.querySelector(`#tr${productoServidor.id}`)
+      let subTotalProductoServidor = document.querySelector('#subTotalProducto50924')
+
+      btnEliminarServidor.addEventListener('click', () => {
+
+         trServidor.remove();
+         subTotalProductoServidor.textContent = 0
+
+         subTotalCompra.innerHTML = subTotalCompra.textContent - productoServidor.unitCost
+
+         if (premium.checked) {
+            costoEnvio.innerHTML = Math.ceil(subTotalCompra.textContent * 15 / 100);
+            precioTotal.innerHTML = parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent);
+         };
+         if (express.checked) {
+            costoEnvio.innerHTML = Math.ceil(subTotalCompra.textContent * 7 / 100);
+            precioTotal.innerHTML = parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent);
+         };
+         if (standard.checked) {
+            costoEnvio.innerHTML = Math.ceil(subTotalCompra.textContent * 5 / 100);
+            precioTotal.innerHTML = parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent);
+         };
+  
+      });
+
+      for (const producto of productoStorage) {
+         let btnEliminarStorage = document.querySelector(`#btnEliminar${producto.id}`)
+         
+         btnEliminarStorage.addEventListener('click', () => {
+            let precioProductoLS = document.querySelector(`#precioProductoLS${producto.id}`);
+            let carroModificado = JSON.parse(localStorage.getItem('productoCarrito'))
+                delete carroModificado[producto.id]
+                localStorage.setItem("productoCarrito", JSON.stringify(carroModificado))
+
+                document.querySelector(`#tr${producto.id}`).remove();
+
+                subTotalCompra.innerHTML = subTotalCompra.textContent - precioProductoLS.textContent
+
+               if (premium.checked) {
+                  costoEnvio.innerHTML = Math.ceil(subTotalCompra.textContent * 15 / 100);
+                  precioTotal.innerHTML = parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent);
+               };
+               if (express.checked) {
+                  costoEnvio.innerHTML = Math.ceil(subTotalCompra.textContent * 7 / 100);
+                  precioTotal.innerHTML = parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent);
+               };
+               if (standard.checked) {
+                  costoEnvio.innerHTML = Math.ceil(subTotalCompra.textContent * 5 / 100);
+                  precioTotal.innerHTML = parseInt(subTotalCompra.textContent) + parseInt( costoEnvio.textContent);
+               };
+                
+         })
+      };
+      
+   };
+   eliminarProducto(carritoData, productoLocalStorage);
 });
